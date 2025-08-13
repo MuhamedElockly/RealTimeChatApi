@@ -24,7 +24,7 @@ namespace Service.CoreServices
             _logger.LogWarning(message, args);
         }
 
-        public void LogError(string message, Exception? exception = null, params object[] args)
+        public void LogError(string message, Exception? exception = null, params object[]? args)
         {
             if (exception != null)
             {

@@ -11,10 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\ServiceAbstraction\ServiceAbstraction.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Hubs\" />
+    <ProjectReference Include="..\SharedData\SharedData.csproj" />
   </ItemGroup>
 
 </Project>

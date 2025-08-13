@@ -8,9 +8,14 @@ namespace Presistence.Data.Configuration
 	{
 		public void Configure(EntityTypeBuilder<Group> builder)
 		{
-			builder.HasOne(g => g.Owner)
-				.WithMany()
-				.OnDelete(DeleteBehavior.NoAction);
+					builder.HasOne(g => g.Owner)
+			.WithMany()
+			.OnDelete(DeleteBehavior.NoAction);
+			
+		// Configure many-to-many relationship for admins
+		builder.HasMany(g => g.Admins)
+			.WithMany(u => u.AdminOfGroups)
+			.UsingEntity(j => j.ToTable("GroupAdmins"));
 		}
 	}
 }

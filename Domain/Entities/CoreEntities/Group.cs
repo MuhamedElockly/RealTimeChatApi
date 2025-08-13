@@ -16,7 +16,7 @@ namespace Domain.Entities.CoreEntities
 		public bool IsDeleted { get; set; } = false;
 		public bool IsLocked { get; set; } = false;
 		public ChatUser Owner { get; set; }
-		public virtual ICollection<GroupAdmin> Admins { get; set; } = new HashSet<GroupAdmin>();
+		public virtual ICollection<ChatUser> Admins { get; set; } = new HashSet<ChatUser>();
 		public virtual ICollection<GroupMember> Members { get; set; } = new HashSet<GroupMember>();
 		public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 

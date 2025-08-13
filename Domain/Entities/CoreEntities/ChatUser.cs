@@ -21,6 +21,6 @@ namespace Domain.Entities.CoreEntities
 		[NotMapped]
 		public IEnumerable<ChatSession> Sessions => SessionsAsUser1.Concat(SessionsAsUser2);
 		public virtual ICollection<GroupMember> MemberOfGroups { get; set; } = new HashSet<GroupMember>();
-		public virtual ICollection<GroupAdmin> AdminOfGroups { get; set; } = new HashSet<GroupAdmin>();
+		public virtual ICollection<Group> AdminOfGroups { get; set; } = new HashSet<Group>();
 	}
 }

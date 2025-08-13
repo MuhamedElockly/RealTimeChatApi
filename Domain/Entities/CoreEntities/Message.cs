@@ -15,6 +15,7 @@ namespace Domain.Entities.CoreEntities
 		public DateTime ReceiveAt { get; set; }
 		public DateTime SeenAt { get; set; }
 		public bool IsSeen { get; set; }
+		public bool IsReceived { get; set; }
 		public bool IsDeleted { get; set; }
 		public virtual MessageAttachment? Attachment { get; set; }
 

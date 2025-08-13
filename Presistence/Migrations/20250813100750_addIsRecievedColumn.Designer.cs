@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Presistence.Data;
 
@@ -11,9 +12,11 @@ using Presistence.Data;
 namespace Presistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250813100750_addIsRecievedColumn")]
+    partial class addIsRecievedColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace Presistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ChatUserGroup", b =>
-                {
-                    b.Property<int>("AdminOfGroupsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AdminsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AdminOfGroupsId", "AdminsId");
-
-                    b.HasIndex("AdminsId");
-
-                    b.ToTable("GroupAdmins", (string)null);
-                });
 
             modelBuilder.Entity("Domain.Entities.CoreEntities.ChatSession", b =>
                 {
@@ -137,6 +125,29 @@ namespace Presistence.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CoreEntities.GroupAdmin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("GroupAdmins");
                 });
 
             modelBuilder.Entity("Domain.Entities.CoreEntities.GroupMember", b =>
@@ -454,21 +465,6 @@ namespace Presistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ChatUserGroup", b =>
-                {
-                    b.HasOne("Domain.Entities.CoreEntities.Group", null)
-                        .WithMany()
-                        .HasForeignKey("AdminOfGroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.CoreEntities.ChatUser", null)
-                        .WithMany()
-                        .HasForeignKey("AdminsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Domain.Entities.CoreEntities.ChatSession", b =>
                 {
                     b.HasOne("Domain.Entities.CoreEntities.ChatUser", "User1")
@@ -508,6 +504,25 @@ namespace Presistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CoreEntities.GroupAdmin", b =>
+                {
+                    b.HasOne("Domain.Entities.CoreEntities.Group", "Group")
+                        .WithMany("Admins")
+                        .HasForeignKey("GroupID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.CoreEntities.ChatUser", "User")
+                        .WithMany("AdminOfGroups")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.CoreEntities.GroupMember", b =>
@@ -628,6 +643,8 @@ namespace Presistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.CoreEntities.ChatUser", b =>
                 {
+                    b.Navigation("AdminOfGroups");
+
                     b.Navigation("MemberOfGroups");
 
                     b.Navigation("SessionsAsUser1");
@@ -637,6 +654,8 @@ namespace Presistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.CoreEntities.Group", b =>
                 {
+                    b.Navigation("Admins");
+
                     b.Navigation("Members");
 
                     b.Navigation("Messages");

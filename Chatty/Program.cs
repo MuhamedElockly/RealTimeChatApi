@@ -25,6 +25,7 @@ namespace Chatty
 									.AllowAnyMethod()
 					);
 			});
+			builder.Services.AddSignalR();
 			#region Identity & Authentication
 			builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 						   .AddEntityFrameworkStores<ApplicationDbContext>()

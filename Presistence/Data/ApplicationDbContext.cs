@@ -30,7 +30,7 @@ namespace Presistence.Data
 		public DbSet<ChatUser> ChatUsers { get; set; }
 		public DbSet<ChatSession> ChatSessions { get; set; }
 		public DbSet<Group> Groups { get; set; }
-		public DbSet<GroupAdmin> GroupAdmins { get; set; }
+
 		public DbSet<GroupMember> GroupMembers { get; set; }
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<MessageAttachment> MessageAttachments { get; set; }
