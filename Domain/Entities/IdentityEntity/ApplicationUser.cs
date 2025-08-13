@@ -9,5 +9,6 @@ namespace Domain.Entities.IdentityEntity
 {
 	public class ApplicationUser : IdentityUser
 	{
+
 	}
 }
