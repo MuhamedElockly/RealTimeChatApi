@@ -13,13 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CoreServices\" />
     <Folder Include="Auto_Mapper_Profile\" />
     <Folder Include="Exception_Implementation\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
   </ItemGroup>
 
 </Project>

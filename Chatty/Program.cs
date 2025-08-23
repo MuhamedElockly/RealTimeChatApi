@@ -83,7 +83,7 @@ namespace Chatty
 
 			app.UseSerilogRequestLogging();
 			#region Exception Handler Middleware Configuration
-			app.UseMiddleware<CustomExceptionMiddleware>();
+			//app.UseMiddleware<CustomExceptionMiddleware>();
 			#endregion
 			app.UseHttpsRedirection();
 

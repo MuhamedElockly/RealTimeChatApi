@@ -9,6 +9,7 @@ namespace Service
 		public static IServiceCollection AddServiceConfiguration(this IServiceCollection services)
 		{
 			services.AddSingleton<ILoggingService, LoggingService>();
+			services.AddScoped<IAuthService, AuthService>();
 			services.AddScoped<IChatService, ChatService>();
 			return services;
 		}

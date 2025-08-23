@@ -16,9 +16,9 @@ namespace Presistence
 				configuration.GetConnectionString("DefaultConnection"),
 			sqlOptions => sqlOptions.EnableRetryOnFailure()
 			));
-			
+			services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 			services.AddScoped<ILoggingRepository, LoggingRepository>();
-			
+
 			return services;
 		}
 	}
